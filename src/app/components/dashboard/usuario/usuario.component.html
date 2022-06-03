@@ -1,0 +1,82 @@
+<div class="container">
+  <mat-toolbar>
+    <span>Usuario</span>
+    <div class="example-spacer"></div>
+    <button mat-raised-button color="primary" routerLink="/dashboard/crear-usuario">Agregar</button>
+  </mat-toolbar>
+
+  <div *ngIf="listUsuarios.length > 0">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex." #input autocomplete="off">
+    </mat-form-field>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort >
+
+        <ng-container matColumnDef="usuario">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+          <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Edad </th>
+          <td mat-cell *matCellDef="let element"> {{element.edad}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dni">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+          <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cumple">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cumpleaños </th>
+          <td mat-cell *matCellDef="let element"> {{element.cumple}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+          <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sexo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sexo </th>
+          <td mat-cell *matCellDef="let element"> {{element.sexo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element; let i = index" style="text-align: right;">
+            <a class="pointer" style="color: #1e3d8b" matTooltip="Ver Usuario">
+                <mat-icon>search</mat-icon>
+            </a>
+            <a class="pointer"  style="color: #4f7f9d" matTooltip="Editar Usuario">
+              <mat-icon >edit</mat-icon>
+          </a>
+          <a class="pointer" (click)="eliminarUsuario(i)" style="color: #bb3664" matTooltip="Eliminar usuario">
+            <mat-icon>delete</mat-icon>
+          </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+ <h2 *ngIf="listUsuarios.length  ==0">No hay registros de usuarios que mostrar</h2>
+
+
+
+</div>
